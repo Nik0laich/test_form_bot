@@ -6,6 +6,7 @@ from aiogram.fsm.state import default_state
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import (CallbackQuery, InlineKeyboardButton,
                            InlineKeyboardMarkup, Message, PhotoSize)
+
 from config import Config, load_config
 
 config: Config = load_config()
@@ -27,12 +28,12 @@ class FSMFillForm(StatesGroup):
     # Создаем экземпляры класса State, последовательно
     # перечисляя возможные состояния, в которых будет находиться
     # бот в разные моменты взаимодейтсвия с пользователем
-    fill_name = State()        # Состояние ожидания ввода имени
-    fill_age = State()         # Состояние ожидания ввода возраста
-    fill_gender = State()      # Состояние ожидания выбора пола
-    upload_photo = State()     # Состояние ожидания загрузки фото
-    fill_education = State()   # Состояние ожидания выбора образования
-    fill_wish_news = State()   # Состояние ожидания выбора получать ли новости
+    fill_name = State()  # Состояние ожидания ввода имени
+    fill_age = State()  # Состояние ожидания ввода возраста
+    fill_gender = State()  # Состояние ожидания выбора пола
+    upload_photo = State()  # Состояние ожидания загрузки фото
+    fill_education = State()  # Состояние ожидания выбора образования
+    fill_wish_news = State()  # Состояние ожидания выбора получать ли новости
 
 
 # Этот хэндлер будет срабатывать на команду /start вне состояний
@@ -176,8 +177,8 @@ async def process_photo_sent(message: Message,
                                          callback_data='no_edu')
     # Добавляем кнопки в клавиатуру (две в одном ряду и одну в другом)
     keyboard: list[list[InlineKeyboardButton]] = [
-                        [secondary_button, higher_button],
-                        [no_edu_button]]
+        [secondary_button, higher_button],
+        [no_edu_button]]
     # Создаем объект инлайн-клавиатуры
     markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
     # Отправляем пользователю сообщение с клавиатурой
@@ -210,8 +211,8 @@ async def process_education_press(callback: CallbackQuery, state: FSMContext):
                                           callback_data='no_news')
     # Добавляем кнопки в клавиатуру в один ряд
     keyboard: list[list[InlineKeyboardButton]] = [
-                                    [yes_news_button,
-                                     no_news_button]]
+        [yes_news_button,
+         no_news_button]]
     # Создаем объект инлайн-клавиатуры
     markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
     # Редактируем предыдущее сообщение с кнопками, отправляя
